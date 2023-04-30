@@ -56,7 +56,7 @@ app.post("/",function(req,res){
     request.end();
 
 });
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("listening to port 3000");
 });
 //API KEY
