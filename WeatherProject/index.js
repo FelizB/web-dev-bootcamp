@@ -29,7 +29,7 @@ app.post("/", function(req, res){
         });
     });*/
     const la=req.body.cityName
-    const key = "8b8059e1f19e38b5843f3660a47265b5"
+    const key = "<key>"
     const url = "https://api.openweathermap.org/data/2.5/weather?lat="+la+"&lon=10.99&appid="+ key+"&units=metric"
     https.get(url,function(response){
         response.on("data",function(data){
