@@ -89,7 +89,29 @@ app.route("/articles/:articleTitle")
             }
         })
 })
-
+.patch(function(req,res){
+    Article.updateOne(
+        {title:req.params.articleTitle})
+        .then(deletedone=>{
+            if(deletedone){
+                res.send("Successfully deleted the specific Article")
+            }else{
+                res.send("No such title was found")
+            }
+        });
+})
+.delete(function(req,res){
+    Article.deleteOne(
+        {title:req.params.articleTitle},
+        {$set: req.body})
+        .then(updateArticle=>{
+            if(updateArticle){
+                res.send("Successfully updated the Article")
+            }else{
+                res.send("No such title was found")
+            }
+        });
+})
 
 
 app.listen(3000, function() {
