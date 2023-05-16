@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const encrypt  = require ("mongoose-encryption");
 
 
 const app = express();
@@ -18,10 +19,13 @@ catch (error) {
     console.log('Error connection: ' + error);
 }
 
-const userSchema={
+const userSchema= new mongoose.Schema({
     email: String,
     password:String
-};
+});
+const secret ="Thisisalittlesecret";
+userSchema.plugin(encrypt,{secret: secret, encryptedFields:["password"]});
+
 const User = new mongoose.model("User", userSchema);
 
 
