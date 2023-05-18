@@ -1,4 +1,5 @@
 //jshint esversion:6
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -23,12 +24,9 @@ const userSchema= new mongoose.Schema({
     email: String,
     password:String
 });
-const secret ="Thisisalittlesecret";
-userSchema.plugin(encrypt,{secret: secret, encryptedFields:["password"]});
 
+userSchema.plugin(encrypt,{secret: process.env.SECRET, encryptedFields:["password"]});
 const User = new mongoose.model("User", userSchema);
-
-
 
 
 app.get("/", function(req,res){
@@ -43,7 +41,6 @@ app.route("/login")
 .post(function(req,res){
     const userN = req.body.username;
     const pass = req.body.password;
-
     User.findOne({email: userN})
     .then(response=>{
         if (!response){
@@ -63,8 +60,6 @@ app.route("/login")
     .catch(err=>{
         console.log("Error", err)
     })
-
-
 })
 
 
