@@ -70,7 +70,8 @@ app.route("/login")
         }
     })
 })
-/*.post(function(req,res){
+/* <------ this code uses bcrypt to aunthenticate users----->
+.post(function(req,res){
     const userN = req.body.username;
     const pass = req.body.password;
     User.findOne({email: userN})
@@ -123,7 +124,8 @@ app.route("/register")
         }
     })
 })
-/*.post(function(req, res){
+/*<------ this code uses bcrypt to register users----->
+.post(function(req, res){
 
     bcrypt.hash(req.body.password, saltRounds,function(err, hash){
         const newUser = new User ({
